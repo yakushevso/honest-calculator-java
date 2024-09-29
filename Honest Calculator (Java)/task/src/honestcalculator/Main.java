@@ -16,9 +16,34 @@ public class Main {
             } else if (!isValidOperation(calc[1])) {
                 System.out.println(Messages.ERROR_OPERATION);
             } else {
+                double x = Double.parseDouble(calc[0]);
+                double y = Double.parseDouble(calc[2]);
+                String operation = calc[1];
+
+                if (isDivisionByZero(y, operation)) {
+                    System.out.println(Messages.DIVISION_ZERO);
+                    continue;
+                }
+
+                System.out.println(calc(x, y, operation));
+
                 return;
             }
         }
+    }
+
+    private static double calc(double x, double y, String operation) {
+        return switch (operation) {
+            case "+" ->  x + y;
+            case "-" ->  x - y;
+            case "*" ->  x * y;
+            case "/" ->  x / y;
+            default -> 0;
+        };
+    }
+
+    private static boolean isDivisionByZero(double y, String operation) {
+        return "/".equals(operation) && y == 0;
     }
 
     private static boolean isNotNumber(String s) {
