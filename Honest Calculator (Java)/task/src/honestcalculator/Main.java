@@ -1,6 +1,7 @@
 package honestcalculator;
 
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -26,13 +27,15 @@ public class Main {
                 float y = Float.parseFloat(calc[2]);
                 String operation = calc[1];
 
+                check(x, y, operation);
+
                 if (isDivisionByZero(y, operation)) {
                     System.out.println(Messages.DIVISION_ZERO);
                     continue;
                 }
 
                 float result = calc(x, y, operation);
-                System.out.println(result);
+                System.out.printf(Locale.US, "%.1f\n", result);
 
                 if (promptYesNo(Messages.SAVE_RESULT)) {
                     memory = result;
@@ -43,6 +46,33 @@ public class Main {
                 }
             }
         }
+    }
+
+    private static void check(float x, float y, String operation) {
+        String msg = "";
+
+        if (isOneDigit(x) && isOneDigit(y)) {
+            msg = msg + Messages.MSG_6;
+        }
+
+        if ((x == 1 || y == 1) && "*".equals(operation)) {
+            msg = msg + Messages.MSG_7;
+        }
+
+        if ((x == 0 || y == 0) && ("*".equals(operation)
+                || "+".equals(operation)
+                || "-".equals(operation))) {
+            msg = msg + Messages.MSG_8;
+        }
+
+        if (!msg.isEmpty()) {
+            msg = Messages.MSG_9 + msg;
+            System.out.println(msg);
+        }
+    }
+
+    private static boolean isOneDigit(float v) {
+        return v > -10 && v < 10 && v % 1 == 0;
     }
 
     private static boolean isValidNum(String[] calc) {

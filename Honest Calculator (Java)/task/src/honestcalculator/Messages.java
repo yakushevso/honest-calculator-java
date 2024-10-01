@@ -6,7 +6,11 @@ public enum Messages {
     ERROR_OPERATION("Yes ... an interesting math operation. You've slept through all classes, haven't you?"),
     DIVISION_ZERO("Yeah... division by zero. Smart move..."),
     SAVE_RESULT("Do you want to store the result? (y / n):"),
-    CONTINUE("Do you want to continue calculations? (y / n):");
+    CONTINUE("Do you want to continue calculations? (y / n):"),
+    MSG_6(" ... lazy"),
+    MSG_7(" ... very lazy"),
+    MSG_8(" ... very, very lazy"),
+    MSG_9("You are");
 
     private final String string;
 
