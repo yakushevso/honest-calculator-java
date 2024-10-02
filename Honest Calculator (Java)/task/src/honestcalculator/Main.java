@@ -38,8 +38,28 @@ public class Main {
                 System.out.printf(Locale.US, "%.1f\n", result);
 
                 if (promptYesNo(Messages.SAVE_RESULT)) {
-                    memory = result;
+                    if (isOneDigit(result)) {
+                        int msg_index = 10;
+
+                        while (msg_index <= 12) {
+                            System.out.println(Messages.valueOf("MSG_" + msg_index));
+                            String answer = readInputSave();
+
+                            if ("y".equals(answer)) {
+                                msg_index++;
+                            } else if ("n".equals(answer)) {
+                                break;
+                            }
+                        }
+
+                        if (msg_index > 12) {
+                            memory = result;
+                        }
+                    } else {
+                        memory = result;
+                    }
                 }
+
 
                 if (!promptYesNo(Messages.CONTINUE)) {
                     break;
